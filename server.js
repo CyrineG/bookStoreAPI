@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.status(200).json('hello');
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const server = http.createServer(app);
 
