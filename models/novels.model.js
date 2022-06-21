@@ -1,4 +1,4 @@
-const books = {
+const novels = {
   // 0: {
   //   series_id: 0,
   //   title: 'title0',
@@ -88,4 +88,4 @@ const books = {
   },
 };
 
-module.exports = books;
+module.exports = novels;

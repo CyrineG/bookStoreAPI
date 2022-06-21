@@ -1,25 +1,34 @@
 const express = require('express');
 const http = require('http');
 const cors = require('cors');
+require('dotenv').config({ path: __dirname + '/.env' });
 
-const booksRouter = require('./routes/books/books.router');
+const novelsRouter = require('./routes/novels/novels.router');
 const usersRouter = require('./routes/users/users.router');
+const client = require('./connection');
 
 const app = express();
 app.use(cors());
 
 app.use(express.json());
 
-app.use('/books', booksRouter);
+app.use('/novels', novelsRouter);
 app.use('/users', usersRouter);
 app.get('/', (req, res) => {
   res.status(200).json('hello');
 });
 
-const PORT = process.env.PORT | 3000;
+async function startServer() {
+  await client.connect(function (err) {
+    if (err) throw err;
+    console.log('Connected!');
+  });
+  const PORT = process.env.PORT;
+  const server = http.createServer(app);
 
-const server = http.createServer(app);
+  server.listen(PORT, () => {
+    console.log(`lstening on port ${PORT}`);
+  });
+}
 
-server.listen(PORT, () => {
-  console.log(`lstening on port ${PORT}`);
-});
+startServer();
