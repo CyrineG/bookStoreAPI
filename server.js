@@ -3,6 +3,7 @@ const http = require('http');
 const cors = require('cors');
 
 const booksRouter = require('./routes/books/books.router');
+const usersRouter = require('./routes/users/users.router');
 
 const app = express();
 app.use(cors());
@@ -10,11 +11,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/books', booksRouter);
+app.use('/users', usersRouter);
 app.get('/', (req, res) => {
   res.status(200).json('hello');
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT | 3000;
 
 const server = http.createServer(app);
 
