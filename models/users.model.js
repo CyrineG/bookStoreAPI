@@ -1,7 +1,6 @@
 const client = require('../connection');
 
 async function getAllUsers() {
-  console.log(creation_date);
   users = [];
 
   query = `SELECT * FROM "public"."Users";`;
@@ -17,11 +16,11 @@ async function getUsersByid(id) {
 
 async function addUser(username, email, creation_date) {
   query = `INSERT INTO "public"."Users"(username, email, creation_date) VALUES ('${username}', '${email}', '${creation_date}');`;
-  await client.query(query, (err, res) => {
-    if (err) throw err;
-    client.end();
-    return res;
-  });
+  result = await client.query(query);
+  if (result.rowCount) {
+    return true;
+  }
+  return false;
 }
 
 async function updateUserBio(id, bio) {
@@ -33,9 +32,18 @@ async function updateUserBio(id, bio) {
   return false;
 }
 
+async function updateUserPic(id, pic) {
+  query = `UPDATE "public"."Users" SET pic='${pic}' WHERE id='${id}'`;
+  result = await client.query(query);
+  if (result.rowCount) {
+    return true;
+  }
+  return false;
+}
 module.exports = {
   getAllUsers,
   addUser,
   getUsersByid,
   updateUserBio,
+  updateUserPic,
 };
