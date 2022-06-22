@@ -73,19 +73,22 @@ async function addNovel(req, res) {
 async function updateNovel(req, res) {
   if (req.params['user_id'] && req.params['novel_id']) {
     novel_id = req.params['novel_id'];
-    author_id = req.params['id'];
-    if (novels.isAuthor(author_id, novel_id)) {
+    author_id = req.params['user_id'];
+
+    if (await novels.isAuthor(author_id, novel_id)) {
       title = req.body['title'];
       creation_date = creation_date = new Date().toISOString();
       summary = req.body['summary'];
       result = await novels.updateNovel(novel_id, title, summary);
-      console.log(result);
       if (result) {
         res.status(200).json(result);
       }
-    } else res.status(403).json({ error: "user isn't novel author" });
+    } else {
+      res.status(403).json({ error: "user isn't novel author" });
+    }
+  } else {
+    res.status(400).json({ error: 'user id and/or novel id not defined ' });
   }
-  res.status(400).json({ error: 'user id and/or novel id not defined ' });
 }
 
 module.exports = {

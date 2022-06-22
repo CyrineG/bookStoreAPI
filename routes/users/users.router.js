@@ -23,9 +23,9 @@ TODO
 - /author/:id/book/:id/chapter/:id -> update a particular chapter
 
 DELETE (only author can delete their work)
+TODO
 - /author/:id -> delete author profile
 - /author/:id/book/:id -> delete a particular book
-TODO
 - /author/:id/book/:id/chapter/:id -> delete a particular chapter
 
 

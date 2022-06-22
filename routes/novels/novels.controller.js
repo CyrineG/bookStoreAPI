@@ -9,7 +9,7 @@ async function getAllNovels(req, res) {
   }
 }
 
-function getNovel(req, res) {
+async function getNovel(req, res) {
   if (req.params['id']) {
     result = await novels.getNovelByid(req.params['id']);
     if (result != {}) res.status(200).json(result);
