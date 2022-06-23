@@ -1,4 +1,4 @@
-const client = require('../connection');
+const client = require('../database/db');
 
 async function getAllUsers() {
   users = [];
@@ -15,7 +15,6 @@ async function getUsersByid(id) {
 }
 
 async function getUsersByUsernameEmail(username, email) {
-  console.log(username);
   query = `SELECT * FROM "public"."Users" WHERE username='${username}' AND email='${email}';`;
   result = await client.query(query);
   if (result.rowCount) {

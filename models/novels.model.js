@@ -26,7 +26,7 @@
 //   },
 // },
 
-const client = require('../connection');
+const client = require('../database/db');
 
 async function getAllNovels() {
   novels = [];

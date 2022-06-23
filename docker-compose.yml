@@ -1,0 +1,8 @@
+bookapi:
+  build: .
+  ports:
+    - 3000:3000
+redis:
+  image: redis
+  ports:
+    - 5444:6379

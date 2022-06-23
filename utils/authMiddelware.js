@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: '1800s',
+  });
 }
 
 function generateRefreshToken(user) {
@@ -20,18 +22,17 @@ function authentificateToken(req, res, next) {
   });
 }
 
-function verifyRefreshToken(token) {
+function verifyRefreshToken(refreshToken) {
   return jwt.verify(
     refreshToken,
     process.env.REFRESH_TOKEN_SECRET,
     (err, user) => {
-      if (err) return res.sendStatus(403);
+      if (err) return false;
       user = {
         username: user.username,
         email: user.email,
       };
-      acessToken = generateAccessToken(user);
-      return accessToken;
+      return user;
     }
   );
 }

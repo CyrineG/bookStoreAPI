@@ -1,6 +1,5 @@
 const usersController = require('./users.controller');
 const express = require('express');
-const { user } = require('pg/lib/defaults');
 
 const usersRouter = express.Router();
 /*

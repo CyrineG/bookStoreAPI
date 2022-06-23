@@ -5,7 +5,8 @@ require('dotenv').config({ path: __dirname + '/.env' });
 
 const novelsRouter = require('./routes/novels/novels.router');
 const usersRouter = require('./routes/users/users.router');
-const client = require('./connection');
+const db = require('./database/db');
+const redis = require('./database/redis');
 
 const auth = require('./utils/authMiddelware');
 const authRouter = require('./routes/auth/auth.router.js');
@@ -23,10 +24,13 @@ app.get('/', (req, res) => {
 });
 
 async function startServer() {
-  await client.connect(function (err) {
+  await db.connect(function (err) {
     if (err) throw err;
     console.log('Connected!');
   });
+
+  await redis.connect();
+
   const PORT = process.env.PORT;
   const server = http.createServer(app);
 
