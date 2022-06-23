@@ -17,5 +17,7 @@ const novelsRouter = express.Router();
 
 novelsRouter.get('/all', novelsController.getAllNovels);
 novelsRouter.get('/:id', novelsController.getNovel);
+novelsRouter.post('/', novelsController.addNovel);
+novelsRouter.put('/:id', novelsController.updateNovel);
 
 module.exports = novelsRouter;

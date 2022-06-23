@@ -1,0 +1,50 @@
+GET http://localhost:3000/
+
+###
+GET http://localhost:3000/users/all
+
+###
+GET http://localhost:3000/novels/all
+
+###
+GET http://localhost:3000/users/1/novels
+
+###
+GET http://localhost:3000/novels/1
+
+###
+POST http://localhost:3000/users/
+Content-Type: application/json
+
+{   
+    "username": "user44",
+    "email":"test@gmail.com"
+}
+
+###
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{   
+    "bio":"hiii"
+}
+
+###
+POST http://localhost:3000/novels/
+Content-Type: application/json
+
+{   
+    "user_id": 1,
+    "title": "from rest test",
+    "summary":"nice one really"
+}
+
+###
+PUT http://localhost:3000/novels/1
+Content-Type: application/json
+
+{   
+    "user_id": 1,
+    "title": "from rest test",
+    "summary":"nice one really"
+}

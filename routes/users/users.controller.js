@@ -21,8 +21,8 @@ async function getUserById(req, res) {
 }
 
 async function addUser(req, res) {
-  username = 'testuser';
-  email = 'test@gmail.com';
+  username = req.body.username;
+  email = req.body.email;
   creation_date = new Date().toISOString();
   result = await users.addUser(username, email, creation_date);
   if (result) {
