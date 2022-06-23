@@ -34,8 +34,6 @@ usersRouter.get('/all', usersController.getAllUsers);
 usersRouter.get('/:id', usersController.getUserById);
 usersRouter.get('/:id/novels', usersController.getUserNovels);
 
-usersRouter.post('/', usersController.addUser);
-
 usersRouter.put('/:id', usersController.updateUserBio);
 
 module.exports = usersRouter;

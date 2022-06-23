@@ -4,6 +4,7 @@ CREATE TABLE public."Users"
     id SERIAL,
     username varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
+    pwd varchar(255) NOT NULL,
     creation_date date NOT NULL,
     bio text,
     photo varchar(255),

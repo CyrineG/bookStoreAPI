@@ -1,10 +1,22 @@
 ###
+POST http://localhost:3000/signup
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjE0IiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY1NTk5NDQ5NSwiZXhwIjoxNjU1OTk0NTI1fQ.JaWFdLbNo9DGXycktvCSjSpsL8PpXqos8AITKcDvv5U
+Content-Type: application/json
+
+{   
+    "username": "user44",
+    "email":"test@gmail.com",
+    "pwd": "test"
+}
+
+###
 POST http://localhost:3000/login
 Content-Type: application/json
 
-{
+{   
     "username": "user44",
-    "email": "test@gmail.com"
+    "email":"test@gmail.com",
+    "pwd": "test"
 }
 
 ###
@@ -12,7 +24,7 @@ POST http://localhost:3000/token
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0NCIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTYwMDY1Nzh9.9oZmaElB7mPDYBSh7ZdOVBq3KNXZnC2Z4qsFesnOYss"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0NCIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTYwMDcwMjN9.CRzQfNjzddyEL88hk-flVPYjB7JA9MIyCagGKAVpguQ"
 }
 
 ###
@@ -20,7 +32,7 @@ DELETE http://localhost:3000/logout
 Content-Type: application/json
 
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0NCIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTYwMDYzMDh9.FiczPlx0EUYoiV2Is4GRU9_nbAkVjKrsdPqOZy68NFs"
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0NCIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2NTYwMDcwMjN9.CRzQfNjzddyEL88hk-flVPYjB7JA9MIyCagGKAVpguQ"
 }
 
 
@@ -35,16 +47,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjE0I
 ###
 GET http://localhost:3000/users/1/novels
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjE0IiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY1NTk5NDQ5NSwiZXhwIjoxNjU1OTk0NTI1fQ.JaWFdLbNo9DGXycktvCSjSpsL8PpXqos8AITKcDvv5U
-
-###
-POST http://localhost:3000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjE0IiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY1NTk5NDQ5NSwiZXhwIjoxNjU1OTk0NTI1fQ.JaWFdLbNo9DGXycktvCSjSpsL8PpXqos8AITKcDvv5U
-Content-Type: application/json
-
-{   
-    "username": "user44",
-    "email":"test@gmail.com"
-}
 
 ###
 PUT http://localhost:3000/users/1
@@ -65,7 +67,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjE0I
 
 ###
 POST http://localhost:3000/novels/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcjE0IiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY1NTk5NDQ5NSwiZXhwIjoxNjU1OTk0NTI1fQ.JaWFdLbNo9DGXycktvCSjSpsL8PpXqos8AITKcDvv5U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsInVzZXJuYW1lIjoidXNlcjQ0IiwiaWF0IjoxNjU2MDExMjk2LCJleHAiOjE2NTYwMTMwOTZ9.0JN14BVJA5PkQCTWIQ2-7-XFYO6CzzCRQa_y7a4_JIE
 Content-Type: application/json
 
 {   

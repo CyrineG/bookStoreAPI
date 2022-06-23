@@ -20,14 +20,14 @@ async function getNovel(req, res) {
 }
 
 async function addNovel(req, res) {
-  if (req.body['user_id'] && req.body['title']) {
-    author_id = req.body['user_id'];
+  if (req.user.id && req.body['title']) {
+    author_id = req.user.id;
     title = req.body['title'];
     creation_date = new Date().toISOString();
     summary = req.body['summary'];
     result = await novels.addNovel(author_id, title, creation_date, summary);
     if (result) {
-      res.status(200).json('novela added successfully');
+      res.status(200).json('novel added successfully');
     } else res.status(404).json({ error: "user doesn't exist" });
   } else {
     res.status(400).json({ error: 'user id undefined ' });

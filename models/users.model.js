@@ -14,8 +14,8 @@ async function getUsersByid(id) {
   return result.rows[0];
 }
 
-async function getUsersByUsernameEmail(username, email) {
-  query = `SELECT * FROM "public"."Users" WHERE username='${username}' AND email='${email}';`;
+async function getUsersByEmail(email) {
+  query = `SELECT * FROM "public"."Users" WHERE email='${email}'`;
   result = await client.query(query);
   if (result.rowCount) {
     return result.rows[0];
@@ -23,8 +23,8 @@ async function getUsersByUsernameEmail(username, email) {
   return false;
 }
 
-async function addUser(username, email, creation_date) {
-  query = `INSERT INTO "public"."Users"(username, email, creation_date) VALUES ('${username}', '${email}', '${creation_date}');`;
+async function addUser(username, email, pwd, creation_date) {
+  query = `INSERT INTO "public"."Users"(username, email, pwd, creation_date) VALUES ('${username}', '${email}', '${pwd}', '${creation_date}');`;
   result = await client.query(query);
   if (result.rowCount) {
     return true;
@@ -55,5 +55,5 @@ module.exports = {
   getUsersByid,
   updateUserBio,
   updateUserPic,
-  getUsersByUsernameEmail,
+  getUsersByEmail,
 };

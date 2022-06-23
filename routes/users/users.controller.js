@@ -1,5 +1,6 @@
 const users = require('../../models/users.model');
 const novels = require('../../models/novels.model');
+const bcrypt = require('bcrypt');
 
 async function getAllUsers(req, res) {
   result = await users.getAllUsers();
@@ -17,18 +18,6 @@ async function getUserById(req, res) {
     else res.status(404).json({ error: "user doesn't exist" });
   } else {
     res.status(400).json({ error: 'user id undefined ' });
-  }
-}
-
-async function addUser(req, res) {
-  username = req.body.username;
-  email = req.body.email;
-  creation_date = new Date().toISOString();
-  result = await users.addUser(username, email, creation_date);
-  if (result) {
-    res.status(200).json({ success: 'user added' });
-  } else {
-    res.status(500).json({ error: 'insert unsuccessful' });
   }
 }
 
@@ -58,7 +47,6 @@ async function getUserNovels(req, res) {
 module.exports = {
   getAllUsers,
   getUserById,
-  addUser,
   updateUserBio,
   getUserNovels,
 };
