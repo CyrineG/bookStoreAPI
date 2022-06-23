@@ -36,9 +36,7 @@ usersRouter.get('/:id', usersController.getUserById);
 usersRouter.get('/:id/novels', usersController.getUserNovels);
 
 usersRouter.post('/', usersController.addUser);
-usersRouter.post('/:id/novels', usersController.addNovel);
 
 usersRouter.put('/:id', usersController.updateUserBio);
-usersRouter.put('/:user_id/novels/:novel_id', usersController.updateNovel);
 
 module.exports = usersRouter;

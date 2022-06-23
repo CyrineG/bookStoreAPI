@@ -7,13 +7,17 @@ const novelsRouter = require('./routes/novels/novels.router');
 const usersRouter = require('./routes/users/users.router');
 const client = require('./connection');
 
+const auth = require('./utils/authMiddelware');
+const authRouter = require('./routes/auth/auth.router.js');
+
 const app = express();
 app.use(cors());
 
 app.use(express.json());
 
-app.use('/novels', novelsRouter);
-app.use('/users', usersRouter);
+app.use(authRouter);
+app.use('/novels', auth.authentificateToken, novelsRouter);
+app.use('/users', auth.authentificateToken, usersRouter);
 app.get('/', (req, res) => {
   res.status(200).json('hello');
 });

@@ -14,6 +14,16 @@ async function getUsersByid(id) {
   return result.rows[0];
 }
 
+async function getUsersByUsernameEmail(username, email) {
+  console.log(username);
+  query = `SELECT * FROM "public"."Users" WHERE username='${username}' AND email='${email}';`;
+  result = await client.query(query);
+  if (result.rowCount) {
+    return result.rows[0];
+  }
+  return false;
+}
+
 async function addUser(username, email, creation_date) {
   query = `INSERT INTO "public"."Users"(username, email, creation_date) VALUES ('${username}', '${email}', '${creation_date}');`;
   result = await client.query(query);
@@ -46,4 +56,5 @@ module.exports = {
   getUsersByid,
   updateUserBio,
   updateUserPic,
+  getUsersByUsernameEmail,
 };
