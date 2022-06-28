@@ -33,7 +33,6 @@ jobs:
 
       - name: docker login
         run: |
-          echo $REGISTRY
           echo ${{REGISTRY}}
           echo ${{env.REGISTRY}}
           docker login ${{env.REGISTRY}} --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
