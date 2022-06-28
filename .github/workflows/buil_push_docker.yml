@@ -24,7 +24,7 @@ jobs:
       - name: Create API env
         run: |
           touch .env
-          echo "postgresql://${secrets.PG_USER}:${secrets.PG_PWD}@${secrets.PG_HOST}:${secrets.PG_PORT}/${secrets.PG_DB}"
+          echo "postgresql://${{secrets.PG_USER}}:${{secrets.PG_PWD}}@${{secrets.PG_HOST}}:${{secrets.PG_PORT}}/${{secrets.PG_DB}}"
           echo "PORT"=${{ secrets.PORT}}  >> .env
           echo "PG_USER"=${{ secrets.PG_USER}}  >> .env
           echo "PG_HOST"=${{secrets.PG_HOST}}  >> .env
