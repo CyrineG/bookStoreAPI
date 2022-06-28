@@ -43,7 +43,6 @@ jobs:
           echo "$COMMIT_SHA"
           export COMMIT_SHA=$(git rev-parse --short "$GITHUB_SHA")
           docker-compose build $IMAGE_NAME
-          docker tag "$DOCKER_REGISTRY/$IMAGE_NAME:latest" "$DOCKER_REGISTRY/$IMAGE_NAME:latest"
           docker push "$DOCKER_REGISTRY/$IMAGE_NAME:latest"
-          docker tag "$IMAGE_NAME:latest" "$DOCKER_REGISTRY/$IMAGE_NAME:v_$GITHUB_REF_NAME-$COMMIT_SHA"
+          docker tag "$DOCKER_REGISTRY/$IMAGE_NAME:latest" "$DOCKER_REGISTRY/$IMAGE_NAME:v_$GITHUB_REF_NAME-$COMMIT_SHA"
           docker push "$DOCKER_REGISTRY/$IMAGE_NAME:v_$GITHUB_REF_NAME-$COMMIT_SHA"
