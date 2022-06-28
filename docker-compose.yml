@@ -5,4 +5,4 @@ bookapi:
 redis:
   image: redis
   ports:
-    - 5444:6379
+    - 6379:6379
