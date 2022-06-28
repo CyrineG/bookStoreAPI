@@ -8,6 +8,15 @@ jobs:
   push_to_registry:
     name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    env:
+      PORT: ${{ secrets.PORT}}
+      PG_USER: ${{ secrets.PG_USER}}
+      PG_PWD: ${{secrets.PG_PWD}}
+      PG_HOST: ${{secrets.PG_HOST}}
+      PG_PORT: ${{secrets.PG_PORT}}
+      PG_DB: ${{secrets.PG_DB}}
+      ACCESS_TOKEN_SECRET: ${{secrets.ACCESS_TOKEN_SECRET}}
+      REFRESH_TOKEN_SECRET: ${{secrets.REFRESH_TOKEN_SECRET}}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -15,7 +24,7 @@ jobs:
       - name: Create API env
         run: |
           touch .env
-          echo "postgresql://${PG_USER}:${PG_PWD}@${PG_HOST}:${PG_PORT}/${PG_DB}"
+          echo "postgresql://${secrets.PG_USER}:${secrets.PG_PWD}@${secrets.PG_HOST}:${secrets.PG_PORT}/${secrets.PG_DB}"
           echo "PORT"=${{ secrets.PORT}}  >> .env
           echo "PG_USER"=${{ secrets.PG_USER}}  >> .env
           echo "PG_HOST"=${{secrets.PG_HOST}}  >> .env
