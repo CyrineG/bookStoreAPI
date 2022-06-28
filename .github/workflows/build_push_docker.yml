@@ -33,11 +33,10 @@ jobs:
 
       - name: docker login
         run: |
-          echo "$REGISTRY"
-          docker login $REGISTRY --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
+          docker login "$REGISTRY" --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
 
       - name: Create image
         run: |
-          docker-compose build $IMAGE_NAME
-          docker tag $IMAGE_NAME:latest $REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA
-          docker push $REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA
+          docker-compose build "$IMAGE_NAME"
+          docker tag "$IMAGE_NAME:latest" "$REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
+          docker push "$REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
