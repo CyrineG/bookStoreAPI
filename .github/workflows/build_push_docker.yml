@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - main
-env:
-  IMAGE_NAME: bookstoreapi
-  DOCKER_REGISTRY: rabbitbeta
-  COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
-  COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
 jobs:
   push_to_registry:
@@ -17,6 +12,11 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+        env:
+          IMAGE_NAME: bookstoreapi
+          DOCKER_REGISTRY: rabbitbeta
+          COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
+          COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
       - name: Create API env
         run: |
