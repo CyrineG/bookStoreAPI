@@ -39,6 +39,6 @@ jobs:
           COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
           COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
         run: |
-          docker-compose build $IMAGE_NAME
+          docker-compose build ${{ env.IMAGE_NAME }}
           docker tag "${{IMAGE_NAME}}:latest" ${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}
           docker push "${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}"
