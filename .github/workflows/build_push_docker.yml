@@ -9,6 +9,11 @@ jobs:
   push_to_registry:
     name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: bookstoreapi
+      DOCKER_REGISTRY: rabbitbeta
+      COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
+      COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
@@ -33,11 +38,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Create image
-        env:
-          IMAGE_NAME: bookstoreapi
-          DOCKER_REGISTRY: rabbitbeta
-          COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
-          COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
         run: |
           echo "$IMAGE_NAME"
           echo "${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}"
