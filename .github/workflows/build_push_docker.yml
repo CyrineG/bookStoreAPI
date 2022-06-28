@@ -5,8 +5,8 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: 'bookstoreapi'
-  REGISTRY: 'rabbitbeta'
+  IMAGE_NAME: bookstoreapi
+  REGISTRY: rabbitbeta
   COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
   COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
@@ -33,9 +33,8 @@ jobs:
 
       - name: docker login
         run: |
-          echo ${{REGISTRY}}
-          echo ${{env.REGISTRY}}
-          docker login ${{env.REGISTRY}} --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
+          echo "$REGISTRY"
+          docker login $REGISTRY --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
 
       - name: Create image
         run: |
