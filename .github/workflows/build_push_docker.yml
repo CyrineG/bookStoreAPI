@@ -11,10 +11,9 @@ jobs:
     env:
       IMAGE_NAME: bookstoreapi
       REGISTRY: rabbitbeta
-      COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
+      COMMIT_BRANCH: ${{GITHUB_REF#refs/heads/}}
       COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
     steps:
-
       - name: Check out the repo
         uses: actions/checkout@v2
 
