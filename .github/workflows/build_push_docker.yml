@@ -5,8 +5,8 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: bookstoreapi
-  REGISTRY: rabbitbeta
+  IMAGE_NAME: 'bookstoreapi'
+  REGISTRY: 'rabbitbeta'
   COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
   COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
