@@ -7,7 +7,6 @@ on:
 env:
   IMAGE_NAME: bookstoreapi
   DOCKER_REGISTRY: rabbitbeta
-  COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
   COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
 jobs:
@@ -42,7 +41,8 @@ jobs:
           echo "$GITHUB_REF"
           echo "$COMMIT_BRANCH"
           echo "$COMMIT_SHA"
+          export COMMIT_SHA=$(git rev-parse --short "$GITHUB_SHA")
           docker-compose build $IMAGE_NAME
-          docker tag "$IMAGE_NAME:latest" "$DOCKER_REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
-          echo "$DOCKER_REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
-          docker push "$DOCKER_REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
+          docker tag "$IMAGE_NAME:latest" "$DOCKER_REGISTRY/$IMAGE_NAME:v_$GITHUB_REF_NAME-$COMMIT_SHA"
+          echo "$DOCKER_REGISTRY/$IMAGE_NAME:v_$GITHUB_REF_NAME-$COMMIT_SHA"
+          docker push ""$DOCKER_REGISTRY/$IMAGE_NAME:v_$GITHUB_REF_NAME-$COMMIT_SHA"
