@@ -12,11 +12,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-        env:
-          IMAGE_NAME: bookstoreapi
-          DOCKER_REGISTRY: rabbitbeta
-          COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
-          COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
       - name: Create API env
         run: |
@@ -38,8 +33,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Create image
+        env:
+          IMAGE_NAME: bookstoreapi
+          DOCKER_REGISTRY: rabbitbeta
+          COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
+          COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
         run: |
-          echo "$IMAGE_NAME"
+          echo "${{env.IMAGE_NAME}}"
           echo "${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}"
           docker-compose build $IMAGE_NAME
           docker tag "${{IMAGE_NAME}}:latest" ${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}
