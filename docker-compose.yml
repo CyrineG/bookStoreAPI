@@ -1,8 +1,14 @@
-bookapi:
-  build: .
-  ports:
-    - 3000:3000
-redis:
-  image: redis
-  ports:
-    - 6379:6379
+version: '3'
+services:
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6333:6379'
+    volumes:
+      - ./data:/data
+  bookapi:
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
