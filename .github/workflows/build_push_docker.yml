@@ -31,9 +31,12 @@ jobs:
           echo "ACCESS_TOKEN_SECRET"=${{secrets.ACCESS_TOKEN_SECRET}}  >> .env
           echo "REFRESH_TOKEN_SECRET"=${{secrets.REFRESH_TOKEN_SECRET}}  >> .env
 
+      - name: docker login
+        run: |
+          docker login ${{env.REGISTRY}} --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
+
       - name: Create image
         run: |
-          docker login $REGISTRY --username "${{ secrets.DOCKERHUB_USERNAME }}" --password "${{ secrets.DOCKERHUB_PASSWORD }}"
           docker-compose build $IMAGE_NAME
           docker tag $IMAGE_NAME:latest $REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA
           docker push $REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA
