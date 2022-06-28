@@ -42,5 +42,5 @@ jobs:
           echo "$COMMIT_BRANCH"
           echo "$COMMIT_SHA"
           docker-compose build $IMAGE_NAME
-          docker tag "{$IMAGE_NAME}:latest" "{$DOCKER_REGISTRY}/{$IMAGE_NAME}:v_{$COMMIT_BRANCH}-{$COMMIT_SHA}"
+          docker tag "${IMAGE_NAME}:latest" "${DOCKER_REGISTRY}/${IMAGE_NAME}:v_${COMMIT_BRANCH}-${COMMIT_SHA}"
           docker push "$DOCKER_REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
