@@ -39,8 +39,6 @@ jobs:
 
       - name: Create image
         run: |
-          echo "$IMAGE_NAME"
-          echo "${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}"
           docker-compose build $IMAGE_NAME
           docker tag "${{IMAGE_NAME}}:latest" ${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}
           docker push "${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}"
