@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+env:
+  IMAGE_NAME: bookstoreapi
+  DOCKER_REGISTRY: rabbitbeta
+  COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
+  COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
 
 jobs:
   push_to_registry:
@@ -33,12 +38,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Create image
-        env:
-          IMAGE_NAME: bookstoreapi
-          DOCKER_REGISTRY: rabbitbeta
-          COMMIT_BRANCH: ${GITHUB_REF#refs/heads/}
-          COMMIT_SHA: $(git rev-parse --short "$GITHUB_SHA")
         run: |
-          docker-compose build ${{ env.IMAGE_NAME }}
-          docker tag "${{IMAGE_NAME}}:latest" ${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}
-          docker push "${{ env.DOCKER_REGISTRY}}/${{ env.IMAGE_NAME}}:v_${{ env.COMMIT_BRANCH}}-${{ env.COMMIT_SHA}}"
+          echo "$COMMIT_BRANCH"
+          echo "$COMMIT_SHA"
+          docker-compose build $IMAGE_NAME
+          docker tag "$IMAGE_NAME:latest" "$DOCKER_REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
+          docker push "$DOCKER_REGISTRY/$IMAGE_NAME:v_$COMMIT_BRANCH-$COMMIT_SHA"
